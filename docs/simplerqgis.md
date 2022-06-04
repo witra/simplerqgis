@@ -1,0 +1,4 @@
+ 
+# simplerqgis module
+
+::: simplerqgis.simplerqgis
