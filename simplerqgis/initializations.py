@@ -22,11 +22,15 @@ def set_qgsapplication_instance():
 def initialise_qgis_resource():
     qgis_path = get_qqis_path()
     set_prefix(qgis_path)
-    app = set_qgsapplication_instance()
-    return app
+    application = set_qgsapplication_instance()
+    return application
 
+"""
 if __name__ == '__main__':
     app = initialise_qgis_resource()
-    print('success to initialise qgis resources')
     print(type(app))
-
+    print(os.getcwd())
+    houston_highway_path = "../tiny_data/vector/highway_houston.shp"
+    h_highway = load_vector_layer(houston_highway_path)
+    print('success to initialise qgis resources')
+"""
