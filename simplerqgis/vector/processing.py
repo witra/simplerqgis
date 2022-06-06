@@ -6,7 +6,7 @@ from qgis.core import QgsVectorLayer, QgsFeature
 from creation import load_vector_layer
 from src.utils.utils import check_existing
 from src.utils.gis.utils import get_crs
-from creation import temporary_vector, add_vector_fields
+from creation import temporary_vector
 from utils import decide_input_load_type, change_attributes_values
 
 
@@ -116,7 +116,7 @@ def square_buffer(input_layer: Union[str, QgsVectorLayer],
     return load_vector_layer(output_path)
 
 
-def change_attribut_column(input_layer: QgsVectorLayer, column_idx, name_prefix: str):
+def change_attribute_column(input_layer: QgsVectorLayer, column_idx, name_prefix: str):
     """
     Changes attribute for all rows on a columns
     """

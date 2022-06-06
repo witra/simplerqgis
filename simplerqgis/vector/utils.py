@@ -3,13 +3,6 @@ from qgis.core import QgsVectorLayer, QgsField
 from typing import Dict, List
 
 
-def get_crs(layer):
-    """
-    return crs code
-    """
-    return layer.crs().authid()
-
-
 def decide_input_load_type(input_layer):
     if type(input_layer) == str:
         input_type = load_vector_layer(input_layer)
@@ -43,6 +36,6 @@ def delete_fields(vector_layer: QgsVectorLayer, field_index: List[int]):
     vector_layer.updateFields()
 
 
-def change_attributes_values(vector_layer: QgsVectorLayer, fid: int, attrs: Dict[int, any]):
+def change_attribute_values(vector_layer: QgsVectorLayer, fid: int, attrs: Dict[int, any]):
     vector_layer.dataProvider().changeAttributeValues({fid: attrs})
     vector_layer.updateFields()
