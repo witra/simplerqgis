@@ -1,4 +1,5 @@
 from qgis.core import (QgsApplication)
+from processing.core.Processing import Processing
 import subprocess
 
 
@@ -24,6 +25,12 @@ def initialise_qgis_resource():
     set_prefix(qgis_path)
     application = set_qgsapplication_instance()
     return application
+
+
+def initialize_processing():
+    app2 = Processing()
+    return app2.initialize()
+
 
 """
 if __name__ == '__main__':
