@@ -1,0 +1,8 @@
+pytest~=7.1.1
+qgis~=3.18.3
+setuptools~=59.8.0
+src~=0.1.0
+numpy~=1.21.6
+geopandas~=0.10.2
+
+shapely~=1.8.0
