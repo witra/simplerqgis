@@ -4,9 +4,14 @@ from qgis import processing
 from simplerqgis.initializations import *
 
 
-def check_existing(path):
+def remove_file(path):
     if os.path.isfile(path):
         os.remove(path)
+
+
+def mkdir(directory):
+    if not os.path.isdir(directory):
+        os.makedirs(directory)
 
 
 def get_crs(layer):

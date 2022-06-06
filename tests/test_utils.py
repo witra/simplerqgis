@@ -1,7 +1,7 @@
 from simplerqgis.utils import *
 
 
-def test_check_existing():
+def test_remove_file():
     pass
 
 

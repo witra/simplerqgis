@@ -4,10 +4,12 @@ from simplerqgis.vector.utils import *
 application = set_qgsapplication_instance()
 
 
-def test_decide_input_load_type():
-    pass
+def test_transform_to_qgsvectorlayer():
+    obj = '../../tiny_data/vector/highway_houston.shp'
+    layer = transform_to_qgsvectorlayer(obj)
+    assert isinstance(layer, QgsVectorLayer)
 
-
+"""
 def test_add_vector_fields():
     pass
 
@@ -26,3 +28,4 @@ def delete_fields():
 
 def change_attribute_values():
     pass
+"""

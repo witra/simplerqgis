@@ -1,5 +1,6 @@
 import os
 from qgis.core import *
+from simplerqgis.utils import mkdir, remove_file
 
 
 def temporary_vector(uri: str, layer_name: str):
@@ -30,12 +31,13 @@ def load_vector_layer(path: str):
     return layer
 
 
-def load_csv_layer(path: str, layer_name: str):
+def load_csv_layer(path: str):
     """
     This function is to load the vector layer.
     parameters:
 
     """
+    layer_name = os.path.basename(path)
     uri = str('file:///' + path + '?delimiter=,')
     layer = QgsVectorLayer(uri, layer_name, 'delimitedtext')
     if not layer.isValid():
@@ -49,6 +51,8 @@ def load_to_MapLayerRegistry(vector_layer: QgsVectorLayer):
 
 
 def write_vector(vector_layer: QgsVectorLayer, write_path: str):
+    remove_file(write_path)
+    mkdir(os.path.dirname(write_path))
     save_option = QgsVectorFileWriter.SaveVectorOptions()
     transform_context = QgsProject.instance().transformContext()
     QgsVectorFileWriter.writeAsVectorFormatV2(vector_layer,

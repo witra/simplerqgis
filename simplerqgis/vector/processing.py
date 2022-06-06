@@ -1,13 +1,10 @@
-import os
-
+from simplerqgis.vector.creation import *
 from typing import List, Union
 from qgis import processing
 from qgis.core import QgsVectorLayer, QgsFeature
-from creation import load_vector_layer
-from src.utils.utils import check_existing
-from src.utils.gis.utils import get_crs
-from creation import temporary_vector
-from utils import decide_input_load_type, change_attributes_values
+from simplerqgis.utils import remove_file, get_crs
+from simplerqgis.vector.utils import (transform_to_qgsvectorlayer,
+                                      change_attribute_values)
 
 
 def clip_vector_by_mask(input_layer: Union[str, QgsVectorLayer],
@@ -20,8 +17,10 @@ def clip_vector_by_mask(input_layer: Union[str, QgsVectorLayer],
     @param output_path:
     @return:
     """
-    input_layer = decide_input_load_type(input_layer)
-    mask = decide_input_load_type(mask)
+    remove_file(output_path)
+    mkdir(os.path.dirname(output_path))
+    input_layer = transform_to_qgsvectorlayer(input_layer)
+    mask = transform_to_qgsvectorlayer(mask)
     parameters = {
         'INPUT': input_layer,
         'MASK': mask,
@@ -33,17 +32,19 @@ def clip_vector_by_mask(input_layer: Union[str, QgsVectorLayer],
 
 def reproject_layer(input_layer: Union[str, QgsVectorLayer],
                     output_path: str, target_crs='EPSG:4326'):
-    input_layer = decide_input_load_type(input_layer)
+    remove_file(output_path)
+    mkdir(os.path.dirname(output_path))
+    input_layer = transform_to_qgsvectorlayer(input_layer)
     parameters = {
         'INPUT': input_layer,
         'TARGET_CRS': target_crs,
         'OUTPUT': output_path
     }
-    check_existing(output_path)
+    remove_file(output_path)
     reproject = processing.run('native:reprojectlayer', parameters)
     return load_vector_layer(output_path)
 
-
+"""
 def create_point_at(geom, distance):
     feature_lenght = geom.length()
     current_distance = 0
@@ -80,12 +81,12 @@ def points_along_line(input_layer: QgsVectorLayer, distance):
 
 def extract_vertices(input_layer: Union[str, QgsVectorLayer],
                      output_path: str):
-    input_layer = decide_input_load_type(input_layer)
+    input_layer = transform_to_qgsvectorlayer(input_layer)
     parameters = {
         'INPUT': input_layer,
         'OUTPUT': output_path
     }
-    check_existing(output_path)
+    remove_file(output_path)
     extracted_vertices = processing.run('native:extractvertices', parameters)
     return load_vector_layer(output_path)
 
@@ -97,7 +98,7 @@ def merge_vector_layer(layer_list: List[QgsVectorLayer],
         'CRS': get_crs(layer_list[0]),
         'OUTPUT': output_path
     }
-    check_existing(output_path)
+    remove_file(output_path)
     merged_layer = processing.run('native:mergevectorlayers', parameters)
     return load_vector_layer(output_path)
 
@@ -106,25 +107,25 @@ def square_buffer(input_layer: Union[str, QgsVectorLayer],
                   distance: int,
                   output_path: str):
     parameters = {
-        'INPUT': decide_input_load_type(input_layer),
+        'INPUT': transform_to_qgsvectorlayer(input_layer),
         'DISTANCE': distance,
         'END_CAP_STYLE': 2,
         'OUTPUT': output_path
     }
-    check_existing(output_path)
+    remove_file(output_path)
     buffered_layer = processing.run('native:buffer', parameters)
     return load_vector_layer(output_path)
 
 
 def change_attribute_column(input_layer: QgsVectorLayer, column_idx, name_prefix: str):
-    """
+
     Changes attribute for all rows on a columns
-    """
+
     features = input_layer.getFeatures()
     for f in features:
         fid = f.id()
         attrs = {column_idx: '{}_{}'.format(name_prefix, fid)}
-        action = change_attributes_values(input_layer, fid, attrs)
+        action = change_attribute_values(input_layer, fid, attrs)
     return action
 
 
@@ -133,7 +134,7 @@ def generate_centroids(vector_layer: QgsVectorLayer, output_path: str):
         'INPUT': vector_layer,
         'OUTPUT': output_path
     }
-    check_existing(output_path)
+    remove_file(output_path)
     centroids = processing.run('native:centroids', parameters)
     return load_vector_layer(output_path)
 
@@ -144,9 +145,9 @@ def join_attributes(input_1: QgsVectorLayer,
                     field_2: str,
                     method: int,
                     output_path: str):
-    """
 
-    """
+
+
 
     parameters = {
         'INPUT': input_1,
@@ -156,7 +157,7 @@ def join_attributes(input_1: QgsVectorLayer,
         'METHOD': method,
         'OUTPUT': output_path
     }
-    check_existing(output_path)
+    remove_file(output_path)
     reproject = processing.run('native:joinattributestable', parameters)
     return load_vector_layer(output_path)
 
@@ -167,9 +168,7 @@ def join_by_spatial(base: QgsVectorLayer,
                     method: int,
                     output_path: str
                     ):
-    """
 
-    """
 
     parameters = {
         'INPUT': base,
@@ -179,9 +178,8 @@ def join_by_spatial(base: QgsVectorLayer,
         'JOIN_FIELDS': 'full_id',
         'OUTPUT': output_path
     }
-    check_existing(output_path)
+    remove_file(output_path)
     reproject = processing.run('native:joinattributesbylocation', parameters)
-    print(reproject)
     if output_path != 'memory:':
         output_layer = reproject['OUTPUT']
     output_layer = load_vector_layer(output_path)
@@ -194,9 +192,11 @@ def buffer(input_layer: QgsVectorLayer, distance: float, output_path: str):
         'DISTANCE': distance,
         'OUTPUT': output_path
     }
-    check_existing(output_path)
+    remove_file(output_path)
     buffer = processing.run('native:buffer', parameters)
     print(buffer)
     if output_path != 'memory:':
         output_layer = buffer['OUTPUT']
     return load_vector_layer(output_path)
+
+"""

@@ -31,8 +31,9 @@ def initialize_processing():
     app2 = Processing()
     return app2.initialize()
 
-
 """
+from vector.creation import load_vector_layer
+import os
 if __name__ == '__main__':
     app = initialise_qgis_resource()
     print(type(app))
