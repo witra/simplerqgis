@@ -1,9 +1,6 @@
 import os.path
 
 from qgis.core import QgsRasterLayer
-from simplerqgis.utils import remove_file
-from typing import List
-from qgis import processing
 
 
 def load_raster(raster_path: str):

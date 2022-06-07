@@ -15,7 +15,7 @@ def test_set_qgsapplication_instance():
 
 
 def test_initialise_qgis_resource():
-    app = type(initialise_qgis_resource())
+    app = type(initialize_qgis_resource())
     app_true = type(QgsApplication([], True))
     assert app == app_true
 

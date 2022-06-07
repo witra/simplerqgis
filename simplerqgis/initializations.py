@@ -20,7 +20,7 @@ def set_qgsapplication_instance():
     return app1
 
 
-def initialise_qgis_resource():
+def initialize_qgis_resource():
     qgis_path = get_qqis_path()
     set_prefix(qgis_path)
     application = set_qgsapplication_instance()
@@ -31,14 +31,4 @@ def initialize_processing():
     app2 = Processing()
     return app2.initialize()
 
-"""
-from vector.creation import load_vector_layer
-import os
-if __name__ == '__main__':
-    app = initialise_qgis_resource()
-    print(type(app))
-    print(os.getcwd())
-    houston_highway_path = "../tiny_data/vector/highway_houston.shp"
-    h_highway = load_vector_layer(houston_highway_path)
-    print('success to initialise qgis resources')
-"""
+

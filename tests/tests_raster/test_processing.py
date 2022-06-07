@@ -5,10 +5,10 @@ from qgis.core import QgsRasterLayer
 from simplerqgis.utils import get_crs
 from simplerqgis.raster.processing import reproject_raster
 from simplerqgis.raster.creation import load_raster
-from simplerqgis.initializations import initialize_processing, initialise_qgis_resource
+from simplerqgis.initializations import initialize_processing, initialize_qgis_resource
 
 
-app1 = initialise_qgis_resource()
+app1 = initialize_qgis_resource()
 app2 = initialize_processing()
 
 
