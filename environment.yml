@@ -2,10 +2,10 @@ name: base
 channels:
   - conda-forge
 dependencies:
-  - pip=22.1=pyhd8ed1ab_0
-  - qgis=3.18.3=py37hdde856c_0
-  - scikit-learn=1.0.2=py37hcabfae0_0
-  - scipy=1.7.3=py37hb6553fb_0
+  - pip=22.1
+  - qgis=3.18.3
+  - scikit-learn=1.0.2
+  - scipy=1.7.3
   - pip:
     - src==0.1.0
 prefix: C:\Users\tahju\anaconda3\envs\MT_recode
