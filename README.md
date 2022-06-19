@@ -1,4 +1,4 @@
-# simplerqgis (still underconstruction)
+# simplerqgis (still under construction)
 
 
 [![image](https://img.shields.io/pypi/v/simplerqgis.svg)](https://pypi.python.org/pypi/simplerqgis)
