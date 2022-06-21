@@ -20,10 +20,10 @@ jobs:
         - name: Set up miniconda with python ${{matrix.python-version}}
           uses: conda-incubator/setup-miniconda@v2
           with:
-                activate-environment: test
+                activate-environment: base
                 environment-file: environment.yml
                 python-version: ${{matrix.python-version}}
-                auto-activate-base: false
+                auto-activate-base: True
         # - name: Add conda to system path
         #  run: |
                 # $CONDA is an environment variable pointing to the root of the miniconda directory
