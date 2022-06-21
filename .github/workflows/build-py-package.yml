@@ -2,14 +2,13 @@ name: python package using pip and conda
 
 on:
     push:
-        branches: ["main", "essential"]
+        branches: ["pre-essential"]
     pull_request:
-        branches: ["main", "essential"]
+        branches: ["pre-essential"]
 
 jobs:
     build:
         runs-on: ubuntu-latest
-        name:
         strategy:
             fail-fast: false
             matrix:
