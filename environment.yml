@@ -1,9 +1,9 @@
-name: base
+name: test_qgis
 channels:
   - conda-forge
+  - conda-forge/label/gcc7
+  - defaults
 dependencies:
-  - pip=22.1
-  - qgis=3.18.3
-  - scikit-learn=1.0.2
-  - scipy=1.7.3
-prefix: C:\Users\tahju\anaconda3\envs\MT_recode
+  - qgis
+  - pytest
+  - pyserial
