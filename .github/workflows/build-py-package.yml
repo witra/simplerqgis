@@ -8,13 +8,13 @@ on:
 
 jobs:
     build:
-        runs-on: ${{matrix.os}}
+        runs-on: ubuntu-latest
         name:
         strategy:
             fail-fast: false
             matrix:
                 python-version: ["3.8", "3.9"]
-                os: [ubuntu-latest, windows-latest, macOS-latest]
+
 
         steps:
         - uses: actions/checkout@v3
@@ -29,6 +29,7 @@ jobs:
         - name: Install dependencies
           run: |
               $CONDA/bin/conda env update --file environment.yml --name base
+
         - name: Lint with flake8
           run: |
                 $CONDA/bin/conda install flake8

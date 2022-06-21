@@ -11,6 +11,6 @@ if __name__ == '__main__':
     app2 = initialize_processing()
     print('type of app', type(app))
     print('current working dir', os.getcwd())
-    houston_highway_path = './tiny_data/vector/highway_houston.shp'
+    houston_highway_path = './tiny_data/vector/Harvey_ROI.shp'
     h_highway = load_vector_layer(houston_highway_path)
     print('success to initialise qgis resources')
