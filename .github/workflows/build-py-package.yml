@@ -1,4 +1,4 @@
-name: python package using pip and conda
+name: python package using miniconda
 
 on:
     push:
@@ -16,21 +16,28 @@ jobs:
 
 
         steps:
-        - uses: actions/checkout@v3
-        - name: Set up python ${{matrix.python-version}}
-          uses: actions/setup-python@v3
+        - uses: actions/checkout@v2
+        - name: Set up miniconda with python ${{matrix.python-version}}
+          uses: conda-incubator/setup-miniconda@v2
           with:
-              python-version: ${{matrix.python-version}}
-        - name: Add conda to system path
-          run: |
+                activate-environment: test
+                environment-file: environment.yml
+                python-version: ${{matrix.python-version}}
+                auto-activate-base: false
+        # - name: Add conda to system path
+        #  run: |
                 # $CONDA is an environment variable pointing to the root of the miniconda directory
-                echo $CONDA/bin >> $GITHUB_PATH
-        - name: Install dependencies
+        #        echo $CONDA/bin >> $GITHUB_PATH
+        - name: check conda
           run: |
-                conda env update --file environment.yml --name base
+                conda info
+                conda list
+        # - name: Install dependencies
+        #   run: |
+        #         conda env update --file environment.yml --name base
         - name: Lint with flake8
           run: |
-                $CONDA/bin/conda install flake8
+                conda install flake8
                 # stop the build if there are Python syntax errors or undefined names
                 flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
                 # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
