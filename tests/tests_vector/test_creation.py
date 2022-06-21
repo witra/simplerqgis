@@ -13,7 +13,7 @@ def test_temporary_vector():
 
 
 def test_load_vector_layer():
-    path = '../../tiny_data/vector/highway_houston.shp'
+    path = './tiny_data/vector/Harvey_ROI.shp'
     vl = load_vector_layer(path)
     assert isinstance(vl, QgsVectorLayer)
 
@@ -29,9 +29,8 @@ def test_load_csv_layer():
 
 
 def test_write_vector():
-    path = '../../tiny_data/vector/highway_houston.shp'
+    path = './tiny_data/vector/Harvey_ROI.shp'
     vl = load_vector_layer(path)
-    # write_path = tmpdir.join('test_write.gpkg')
-    write_path = '../../tiny_data/inter/test_write.gpkg'
+    write_path = './tiny_data/inter/test_write.gpkg'
     w_vl = write_vector(vl, write_path)
     assert os.path.isfile(write_path) is True

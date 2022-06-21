@@ -4,7 +4,7 @@ from qgis.core import QgsApplication
 
 
 def test_get_qgis_path():
-    qgis_path = get_qqis_path()
+    qgis_path = get_qgis_path()
     assert type(qgis_path) == str
 
 

@@ -3,8 +3,7 @@ from typing import List, Union
 from qgis import processing
 from qgis.core import QgsVectorLayer, QgsFeature
 from simplerqgis.utils import remove_file, get_crs
-from simplerqgis.vector.utils import (transform_to_qgsvectorlayer,
-                                      change_attribute_values)
+from simplerqgis.vector.utils import (transform_to_qgsvectorlayer)
 
 
 def clip_vector_by_mask(input_layer: Union[str, QgsVectorLayer],

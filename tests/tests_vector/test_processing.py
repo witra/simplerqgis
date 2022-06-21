@@ -8,18 +8,18 @@ process = initialize_processing()
 
 
 def test_clip_vector_by_mask():
-    obj = '../../tiny_data/vector/highway_houston.shp'
-    mask = '../../tiny_data/vector/Houston_area_prediction.shp'
-    out = '../../tiny_data/inter/test_clip.gpkg'
+    obj = './tiny_data/vector/Harvey_ROI.shp'
+    mask = './tiny_data/vector/Houston_area_prediction.shp'
+    out = './tiny_data/inter/test_clip.gpkg'
     clipped = clip_vector_by_mask(obj, mask, out)
     assert os.path.isfile(out) is True
     assert isinstance(clipped, QgsVectorLayer)
 
 
 def test_reproject_layer():
-    obj = '../../tiny_data/vector/highway_houston.shp'
+    obj = './tiny_data/vector/Harvey_ROI.shp'
     target_crs = 'EPSG:3857'
-    out = '../../tiny_data/inter/test_reproject.gpkg'
+    out = './tiny_data/inter/test_reproject.gpkg'
     reproject = reproject_layer(obj, out, target_crs)
     assert os.path.isfile(out) is True
     assert isinstance(reproject, QgsVectorLayer)

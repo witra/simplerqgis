@@ -5,7 +5,7 @@ application = set_qgsapplication_instance()
 
 
 def test_transform_to_qgsvectorlayer():
-    obj = '../../tiny_data/vector/highway_houston.shp'
+    obj = './tiny_data/vector/Harvey_ROI.shp'
     layer = transform_to_qgsvectorlayer(obj)
     assert isinstance(layer, QgsVectorLayer)
 
