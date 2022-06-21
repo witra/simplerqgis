@@ -30,6 +30,7 @@ jobs:
         #        echo $CONDA/bin >> $GITHUB_PATH
         - name: check conda
           run: |
+                conda activate test_qgis
                 conda info
                 conda list
         # - name: Install dependencies
@@ -49,4 +50,5 @@ jobs:
           shell: bash -l {0}
           run: |
                 conda install pytest
+                conda activate test_qgis
                 pytest ./tests
